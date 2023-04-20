@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+    <title>Message to MD5 Hash</title>
+<body>
+body {
+  background-image: url("background.jpg");
+}</style>
+</head>
+
+    <h1>Message to MD5 Hash</h1>
+    <form method="POST" action="/hash">
+        <label for="message">Enter your message:</label><br>
+        <input type="text" name="message" id="message" required><br>
+        <button type="submit">Generate MD5 Hash</button>
+    </form>
+
+    <p id="md5_hash"></p>
+    </stle>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $('form').submit(function(event) {
+            event.preventDefault();
+            var formData = $(this).serialize();
+            $.ajax({
+                type: 'POST',
+                url: '/hash',
+                data: formData,
+                success: function(md5Hash) {
+                    $('#md5_hash').text('MD5 hash of message: ' + md5Hash);
+                },
+                error: function() {
+                    alert('Error generating MD5 hash.');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
